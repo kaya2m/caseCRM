@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Müşteri Düzenle";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6 card shadow-lg p-4">
+        <div class="card-header text-center mb-4">
+            <h2>Müşteri Düzenle</h2>
+        </div>
+        <form id="editCustomerForm">
+            <input type="hidden" id="customerId" name="Id" value="@Model.Id" />
+            <div class="form-group mb-3">
+                <label for="firstName">Ad</label>
+                <input type="text" class="form-control form-control-lg rounded" id="firstName" name="FirstName" value="@Model.Firstname" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="lastName">Soyad</label>
+                <input type="text" class="form-control form-control-lg rounded" id="lastName" name="LastName" value="@Model.Lastname" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="region">Bölge</label>
+                <input type="text" class="form-control form-control-lg rounded" id="region" name="Region" value="@Model.Region" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">E-posta</label>
+                <input type="email" class="form-control form-control-lg rounded" id="email" name="Email" value="@Model.Email" required>
+            </div>
+            <div class="form-group mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="active" name="Active" @if(Model.Active) { <text>checked</text> }>
+                <label class="form-check-label" for="active">Aktif</label>
+            </div>
+            <div class="d-grid mt-4">
+                <button type="button" class="btn btn-success btn-lg" id="editCustomerBtn">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#editCustomerBtn').click(function () {
+                var customerId = $('#customerId').val();
+                var customerData = {
+                    Id: customerId,
+                    FirstName: $('#firstName').val(),
+                    LastName: $('#lastName').val(),
+                    Region: $('#region').val(),
+                    Email: $('#email').val(),
+                    Active: $('#active').is(':checked') 
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Customer/Edit/' + customerId,
+                    data: customerData,
+                    success: function (response) {
+                        if (response.isSuccessful) {
+                            alert("Müşteri başarıyla güncellendi!");
+                            window.location.href = "/Customer/Index";
+                        } else {
+                            alert("Hata: " + response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Müşteri güncellenirken bir hata oluştu: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

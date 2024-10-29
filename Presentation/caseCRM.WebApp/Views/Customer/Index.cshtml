@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Customer List";
+}
+
+<div class="container mt-5">
+    <h2>Müşteri Listesi</h2>
+   <div class="mb-4 d-flex justify-content-between">
+    <a href="@Url.Action("Create", "Customer")" class="btn btn-primary">Yeni Müşteri Ekle</a>
+
+<div class="input-group w-25">
+  <span class="input-group-text" id="search-icon">
+<i class="fa-solid fa-magnifying-glass"></i>
+  </span>
+  <input type="text" id="searchInput" class="form-control" placeholder="Arama yap..." aria-label="Arama yap..." aria-describedby="search-icon">
+</div>
+</div>
+   
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th style="display: none;">Id</th>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>E-posta</th>
+                <th>Region</th>
+                <th>Aktif</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="customerTable">
+            @foreach (var customer in Model)
+            {
+                <tr id="row-@customer.Id">
+                    <td style="display: none;">@customer.Id</td>
+                    <td>@customer.Firstname</td>
+                    <td>@customer.Lastname</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Region</td>
+                    <td>@(customer.Active ? "Evet" : "Hayır")</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = customer.Id })" class="btn btn-warning btn-sm me-3"><i class="fa fa-pencil"></i> Düzenle</a>
+                        <button class="btn btn-danger btn-sm delete-btn" 
+                                onclick="deleteCustomer('@customer.Id')" 
+                                @(customer.Active ? "" : "disabled")> <i class="fa fa-trash"></i> Sil</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteCustomer(customerId) {
+            if (confirm("Bu müşteriyi silmek istediğinizden emin misiniz?")) {
+                $.ajax({
+                    url: '/Customer/Delete/' + customerId,
+                    type: 'DELETE',
+                    success: function (response) {
+                        if (response.isSuccessful) {
+                           location.reload();
+                        } else {
+                            alert("Error: " + response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Silme işlemi başarısız oldu: " + xhr.responseText);
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            $("#customerTable tr").each(function () {
+                var activeStatus = $(this).find("td:nth-child(5)").text().trim();
+                if (activeStatus === "Hayır") {
+                    $(this).find(".delete-btn").prop("disabled", true);
+                }
+            });
+        });
+
+         $('#searchInput').on('keyup', function () {
+            var value = $(this).val().toLowerCase();
+            $('#customerTable tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    </script>
+}

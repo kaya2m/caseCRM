@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Yeni Müşteri Ekle";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6 card shadow-lg p-4">
+        <div class="card-header text-center mb-4">
+            <h2>Yeni Müşteri Ekle</h2>
+        </div>
+        <form id="createCustomerForm">
+            <div class="form-group mb-3">
+                <label for="firstName">Ad</label>
+                <input type="text" class="form-control form-control-lg rounded" id="firstName" name="FirstName" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="lastName">Soyad</label>
+                <input type="text" class="form-control form-control-lg rounded" id="lastName" name="LastName" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="region">Region</label>
+                <input type="text" class="form-control form-control-lg rounded" id="region" name="region" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">E-posta</label>
+                <input type="email" class="form-control form-control-lg rounded" id="email" name="Email" required>
+            </div>
+            <div class="form-group mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="active" name="Active"
+                <label class="form-check-label" for="active">Aktif</label>
+            </div>
+            <div class="d-grid mt-4">
+                <button type="button" class="btn btn-success btn-lg" id="createCustomerBtn">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#createCustomerBtn').click(function () {
+                var customerData = {
+                    FirstName: $('#firstName').val(),
+                    LastName: $('#lastName').val(),
+                    Email: $('#email').val(),
+                    Region:$('#region').val(),
+                     Active: $('#active').is(':checked') ,
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/Customer/Create',
+                    data: customerData,
+                    success: function (response) {
+                        if (response.isSuccessful) {
+                            alert("Yeni müşteri başarıyla eklendi!");
+                            window.location.href = "/Customer/Index";
+                        } else {
+                            alert("Hata: " + response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Müşteri eklenirken bir hata oluştu: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caseCRM.DataAccess", "DataAccess\caseCRM.DataAccess\caseCRM.DataAccess.csproj", "{EA3686E2-5E7F-402F-AFFB-C097CB159A68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caseCRM.Entities", "Entities\caseCRM.Entities\caseCRM.Entities.csproj", "{5D7B89D0-298C-486A-9ED3-0305420B2B70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caseCRM.Service", "Service\caseCRM.Service\caseCRM.Service.csproj", "{59A4CE3F-BAFF-4720-9397-318670C2006E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker-compose", "docker-compose", "{FBC54851-3F1C-41DC-B359-41C7707E1F03}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caserCRM.WebApp", "Presentation\caseCRM.WebApp\caserCRM.WebApp.csproj", "{9C46ED6E-842D-4A42-B451-6FBBC8E96965}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA3686E2-5E7F-402F-AFFB-C097CB159A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA3686E2-5E7F-402F-AFFB-C097CB159A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA3686E2-5E7F-402F-AFFB-C097CB159A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA3686E2-5E7F-402F-AFFB-C097CB159A68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D7B89D0-298C-486A-9ED3-0305420B2B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7B89D0-298C-486A-9ED3-0305420B2B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7B89D0-298C-486A-9ED3-0305420B2B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7B89D0-298C-486A-9ED3-0305420B2B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A4CE3F-BAFF-4720-9397-318670C2006E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A4CE3F-BAFF-4720-9397-318670C2006E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A4CE3F-BAFF-4720-9397-318670C2006E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A4CE3F-BAFF-4720-9397-318670C2006E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C46ED6E-842D-4A42-B451-6FBBC8E96965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C46ED6E-842D-4A42-B451-6FBBC8E96965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C46ED6E-842D-4A42-B451-6FBBC8E96965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C46ED6E-842D-4A42-B451-6FBBC8E96965}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8B75181-FADB-46B4-B897-6E2CFD4BA8A2}
+	EndGlobalSection
+EndGlobal
